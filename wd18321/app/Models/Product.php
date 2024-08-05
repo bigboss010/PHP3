@@ -10,6 +10,13 @@ class Product extends Model
     use HasFactory;
 
     protected $table = 'products';
+    public $primaryKey = 'product_id';
+    public $fillable = [
+        'image',
+        'name',
+        'price',
+        'description'
+    ];
     
     // public $primaryKey = 'id'; // Mặc định là id nên không cần khai báo
     // public $incrementing = true; // Nếu primary không phải số thì đặt false

@@ -19,10 +19,9 @@ class SanPham extends Model
 
     // Cách 2: Sử dụng Query Builer
     public function getList(){
-        $listSanPham = DB::table('san_phams')
-        ->orderByDesc('id')
-        ->get();
-        return $listSanPham;
+        return DB::table('san_phams')
+        ->orderByDesc('id');
+     
     }
 
     public function addSanPham($data){

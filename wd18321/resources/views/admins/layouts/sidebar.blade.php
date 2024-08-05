@@ -4,7 +4,7 @@
         <a href="#" class="list-group-item ">
             Quản lý người dùng
         </a>
-        <a href="{{ route('product.index') }}" class="list-group-item">
+        <a href="" class="list-group-item">
             Quản lý sản phẩm
         </a>
         <a href="#" class="list-group-item ">

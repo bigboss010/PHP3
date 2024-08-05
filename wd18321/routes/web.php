@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthenController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KhachHangController;
 use App\Http\Controllers\KhanhController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SanPhamController;
 use App\Http\Controllers\TinController;
 use App\Http\Controllers\UserController;
@@ -70,14 +71,29 @@ Route::group(['prefix' => 'users', 'as' => 'users.'], function(){
 
 });
 
-Route::group(['prefix' => 'product', 'as' => 'product.'], function(){
-    Route::get('list-product', [ProductController::class, 'index'])->name('index');
+Route::get('/login', [AuthenController::class, 'login'])->name('login');
+Route::post('/login', [AuthenController::class, 'postLogin'])->name('postLogin');
+Route::get('/logout', [AuthenController::class, 'logout'])->name('logout');
+Route::get('/register', [AuthenController::class, 'register'])->name('register');
+Route::post('/postRegister', [AuthenController::class, 'postRegister'])->name('postRegister');
+
+// http://127.0.0.1:8000
+Route::group([
+    'prefix' => 'admin', 
+    'as' => 'admin.',
+    'middleware' => 'checkAdmin'
+], function(){
+    Route::group([
+        'prefix' => 'products', 
+        'as' => 'products.'
+    ], function(){
+    Route::get('/', [ProductController::class, 'listProducts'])->name('listProducts');
     Route::get('add-product', [ProductController::class, 'addProduct'])->name('addProduct'); 
     Route::post('add-product', [ProductController::class, 'addPostProduct'])->name('addPostProduct');
     Route::get('del-product/{id}', [ProductController::class, 'delProduct'])->name('delProduct');
     Route::get('detail-product/{id}', [ProductController::class, 'detailProduct'])->name('detailProduct');
-    Route::post('update-product/{id}', [ProductController::class, 'updatePostProduct'])->name('updatePostProduct');
-
+    Route::patch('update-product/{id}', [ProductController::class, 'updatePostProduct'])->name('updatePostProduct');
+    });
 });
 
 

@@ -126,10 +126,10 @@
                         </tbody>
                     </table>
                     {{-- Hiển thị phân trang --}}
-                    {{ $listSanPham->links('pagination::bootstrap-5')}}
+                    {{ $listSanPhams->links("pagination::bootstrap-5") }}
                 @else
                     <div class="d-flex justify-content-center align-items-center">
-                        <p>Không có diễn viên nào được tìm thấy.</p>
+                        <p>Không có sản phẩm nào được tìm thấy.</p>
                     </div>
                 @endif
             </div>

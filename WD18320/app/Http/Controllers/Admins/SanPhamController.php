@@ -7,6 +7,7 @@ use App\Http\Requests\SanPhamRequest;
 use App\Models\SanPham;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Pagination\Paginator;
 
 class SanPhamController extends Controller
 {
@@ -28,20 +29,22 @@ class SanPhamController extends Controller
 
         $title = 'Danh sách sản phẩm';
         // Lấy dữ liệu từ form tìm kiếm
-        $sreach = $request->input('search');
-        $sreachTrangThai = $request->input('searchTrangThai');
+        $search = $request->input('search');
+        $searchTrangThai = $request->input('searchTrangThai');
         // Sử dụng Eloquent
         $listSanPhams = SanPham::query()
-        ->when($sreach, function($query, $sreach) {
-            return $query->where('ma_san_pham', 'like', "%{$sreach}%")
-            ->orwhere('ten_san_pham', 'like', "%{$sreach}%");
-        })
-        ->when($sreachTrangThai, function($query, $sreachTrangThai) {
-            return $query->where('trang_thai', 'like', "%{$sreachTrangThai}%");
-        })
-        ->orderByDesc('id')
-        ->paginate(3);
+            ->when($search, function ($query, $search) {
+                return $query->where('ma_san_pham', 'like', "%{$search}%")
+                    ->orWhere('ten_san_pham', 'like', "%{$search}%");
+            })
+            ->when($searchTrangThai, function ($query, $searchTrangThai) {
+                return $query->where('trang_thai', 'like', "%{$searchTrangThai}%");
+            })
+            ->orderByDesc('id')
+            ->paginate(3);
+
         return view('admins.index', compact('title', 'listSanPhams'));
+
     }
 
     /**

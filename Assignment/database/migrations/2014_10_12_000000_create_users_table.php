@@ -18,6 +18,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->unsignedBigInteger('chuc_vu_id')->default(2);
+            $table->tinyInteger('deleted')->default(0);
             $table->timestamps();
         });
     }

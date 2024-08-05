@@ -7,7 +7,7 @@
     <title>@yield('title')</title>
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
-    @yield('css')
+    @stack('css')
 </head>
 
 <body>
@@ -33,7 +33,7 @@
 
 
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-    @yield('js')
+    @stack('js')
 </body>
 
 </html>
